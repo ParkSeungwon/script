@@ -38,7 +38,4 @@ test
 ./passafe.x
 ./core
 ./loopback.img
-./.vscode/ipch/f58bfdb5adf70099/deduce.ipch
-./.vscode/ipch/7e1112f22bf7362e/ch.ipch
-./.git/objects/ad/54d5aef8929de0e7f93fbface5418d02ecf18a
-./.git/objects/3d/24114ae62e7702636a87f870456f2aa2f60c73
+./.vscode/
