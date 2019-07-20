@@ -20,6 +20,13 @@ for i in `ls -d */`; do
 		git add .
 		git commit -m"`date` autocommit"
 	fi
-	git push --all
+	if ! git rev-parse --abbrev-ref --symbolic-full-name @{u}; then
+		if ! git branch --set-upstream-to=origin/$i; then 
+			git push --set-upstream origin $i
+		fi
+	fi
+	if [[ `git status | sed -En '/커밋만큼 앞에 있습니다/p'` != "" ]]; then
+		git push --all
+	fi
 	cd ..
 done

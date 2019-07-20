@@ -40,3 +40,7 @@ test
 ./core
 ./loopback.img
 ./.vscode/
+find
+.
+-size
++3M
