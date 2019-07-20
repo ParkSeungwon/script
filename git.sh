@@ -1,10 +1,14 @@
 #!/bin/bash
 
+if [ ! wget -q --spider http://google.com ]; then exit 1; fi
 cd ~/Programming
 for i in `ls -d */`; do
 	i=${i%/}
 	cd $i
 	echo $i
+	for j in find . -size +3M; do
+		if [[ `git check-ignore $j` == "" ]]; then echo $j >> .gitignore; fi
+	done
 	if [ ! -d .git ]; then 
 		git init; 
 		if [ ! -f README.md ]; then echo "# $i" > README.md; fi
