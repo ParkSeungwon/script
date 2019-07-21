@@ -37,12 +37,5 @@ test
 *.app
 *.vim
 ./passafe.x
-./core
-./loopback.img
-./.vscode/
-find
-.
--size
-+3M
 core
 core
