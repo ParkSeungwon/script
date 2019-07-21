@@ -2,7 +2,10 @@
 
 for j in `find . -size +3M -not -path '\./\.*'`; do # ignore +3M files
 	j=${j#./}
-	if [[ `git check-ignore $j` == "" ]]; then echo $j >> .gitignore; fi
+	if [[ `git check-ignore $j` == "" ]]; then
+		while read line; do [[ $line == "$j" ]] && continue 2; done < .gitignore
+		echo $j >> .gitignore;
+	fi
 done
 
 i=`pwd`
