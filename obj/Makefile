@@ -9,7 +9,7 @@ cvLIB = $(shell pkg-config opencv --libs)
 all : $(EXE)
 
 ../%.x : %.x $(OBJ)
-	$(CC) -o $@ $< $(OBJ) -lstdc++fs -lpthread $(sfmlLIB)
+	$(CC) -o $@ $< $(OBJ) -lstdc++fs -lpthread $(sfmlLIB) -lnettle -lhogweed
 
 ../%.x : %.tx $(OBJ) $(TOBJ)
 	$(CC) -o $@ $< $(OBJ) $(TOBJ) -lstdc++fs -lpthread $(sfmlLIB)
