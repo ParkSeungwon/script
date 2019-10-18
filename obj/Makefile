@@ -4,6 +4,7 @@ TOBJ = $(wildcard *.t)
 EXE = $(patsubst %.x, ../%.x, $(wildcard *.x))
 gtkmmLIB = $(shell pkg-config gtkmm-3.0 --libs)
 sfmlLIB = $(shell pkg-config sfml-audio --libs)
+sfmlLIB += $(shell pkg-config sfml-graphics --libs)
 cvLIB = $(shell pkg-config opencv --libs)
 
 all : $(EXE)

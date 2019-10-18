@@ -1,36 +1,50 @@
 #include<SFML/Audio.hpp>
-#include<thread>
-#include<chrono>
-#include<cstdlib>
-#include<iostream>
+#include<SFML/Graphics.hpp>
 using namespace std;
-
-bool finish = false;
-
-void get_input() {
-	while(1) {
-		char c;
-		cin >> c;
-		if(c == 'q') {
-			finish = true;
-			break;
-		}
-	}
-}
+using namespace sf;
 
 int main(int ac, char** av) {
-	if(ac < 2) return 0;
-
-	cout << "enter q to finish" << endl;
-	thread th{get_input};
-	while(system(av[1]) && !finish);//quit
-	sf::SoundBuffer buf;
-	buf.loadFromFile("/home/zezeon/Programming/script/wallewal.wav");
-	sf::Sound sound;
+	SoundBuffer buf;
+	buf.loadFromFile("/home/zeta/Music/app.wav");
+	Sound sound;
 	sound.setBuffer(buf);
-	sound.play();//ending alarm
-	this_thread::sleep_for(4.5s);
-	th.join();
+//	sound.play();//ending alarm
+
+//	VideoMode vm{1280, 720};
+	RenderWindow window({1280, 720}, "Hello", sf::Style::Default);
+	window.setFramerateLimit(60);
+	Texture texture;
+	texture.loadFromFile("../opencv/Lenna.png");
+	Sprite sprite;
+	sprite.setTexture(texture);
+	sprite.setOrigin(250, 250);
+	int x=250, y=250;
+	float r = 0;
+
+	Font font, font2;
+	font2.loadFromFile("/usr/lib/ruby/2.5.0/rdoc/generator/template/darkfish/fonts/SourceCodePro-Bold.ttf");
+	font.loadFromFile("/usr/share/fonts/truetype/nanum/NanumSquareL.ttf");
+	Text text{"Hello World!", font2, 80};
+	text.setPosition(20, 20);
+	text.setFillColor({255, 0, 0, 125});
+	text.setStyle(Text::Bold);
+	text.setOutlineThickness(2);
+	text.setOutlineColor({0, 255, 0, 255});
+
+	while(window.isOpen()) {
+		if(Keyboard::isKeyPressed(Keyboard::Escape)) window.close();
+		else if(Keyboard::isKeyPressed(Keyboard::Right)) x++;
+		else if(Keyboard::isKeyPressed(Keyboard::Left)) x--;
+		else if(Keyboard::isKeyPressed(Keyboard::Up)) y--;
+		else if(Keyboard::isKeyPressed(Keyboard::Down)) y++;
+		else if(Keyboard::isKeyPressed(Keyboard::Return)) sprite.rotate(1);
+		
+		sprite.setPosition(x, y);
+		window.clear();
+		window.draw(sprite);
+		window.draw(text);
+		window.display();
+	}
 }
 
 
