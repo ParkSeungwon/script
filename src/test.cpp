@@ -1,17 +1,32 @@
-#include<optional>
+#include<fstream>
 #include<iostream>
+#include<functional>
+#include<string>
+#include<sstream>
+#include<cctype>
+#include<algorithm>
+#include<map>
+#include<random>
+#include<complex>
+#include<csignal>
+#include<thread>
+#include<mutex>
 using namespace std;
 
-optional<string> f(bool i) {
-	if( i) return "" ;
-	else return {};
+const char *p[][2] = {
+	{".html", "text/html"},
+	{".css", "text/css"},
+	{".mp3", "web/audio"}
+};
+mutex mtx;
+int f(int a) {
+	static int k=0;
+	int i;
+	for( i=0; i<a; i++) k += i;
+	lock_guard lock{mtx};
+	cout << k << endl;
 }
 int main() {
-	char c[] = {0x20, 0x0e, 0x74, 0x6c, 0x73, 0x31, 0x33, 0x20, 0x66, 0x69, 0x6e, 0x69, 0x73, 0x68, 0x65, 0x64, 0x00};
-	cout << c << endl;
-//	for(char a : c) cout << hex << +a << ':' << a << ',';
-
-	if(f(true)) cout << "\"\"" << endl;
-	if(f(false)) cout << "{}" << endl;
+	string s = "a.html";
+	cout << s.substr(s.rfind('.'), 4) << endl;
 }
-
