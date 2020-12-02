@@ -1,6 +1,6 @@
-CFLAG = -c -g -std=c++17 -fmax-errors=1 -I/usr/include/p11-kit-1
+CFLAG = -c -g -std=c++20 -fmax-errors=1 -I/usr/include/p11-kit-1
 INCLUDE = -I../ -I/usr/include/opencv
-CC = g++
+CC = g++-10
 OBJ = $(patsubst %.cc, ../obj/%.o, $(wildcard *.cc))
 MAIN_OBJ = $(patsubst %.cpp, ../obj/%.x, $(wildcard *.cpp))
 
